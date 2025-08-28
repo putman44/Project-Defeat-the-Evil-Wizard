@@ -1,85 +1,5 @@
-# Base Character class
-class Character:
-    def __init__(self, name, health, attack_power):
-        self.name = name
-        self.health = health
-        self.attack_power = attack_power
-        self.max_health = health
-
-    def attack(self, opponent):
-        opponent.health -= self.attack_power
-        print(f"{self.name} attacks {opponent.name} for {self.attack_power} damage!")
-        if opponent.health <= 0:
-            print(f"{opponent.name} has been defeated!")
-
-    def display_stats(self):
-        print(
-            f"{self.name}'s Stats - Health: {self.health}/{self.max_health}, Attack Power: {self.attack_power}"
-        )
-
-    def special_ability(self, turn):
-        print(f"{self.name} has activated {self.special_ability}")
-
-    def check_special_ability(self, turn):
-        pass
-
-
-# Warrior class (inherits from Character)
-class Warrior(Character):
-    def __init__(self, name):
-        super().__init__(name, health=140, attack_power=25)
-        self.special_ability_active = None
-        self.special_ability_turn = None
-
-    def special_ability(self, turn):
-        print("\nWhich special ability would you like to use?")
-        print("1. Rage")
-        print("2. Defence")
-
-        choice = input("Choose special ability: ")
-        if choice == "1":
-            self.rage(turn)
-        elif choice == "2":
-            self.defence(turn)
-        else:
-            print("Invalid choice")
-
-    def rage(self, turn):
-        if self.special_ability_active is None:
-            self.attack_power += 20
-            self.special_ability_active = "Rage"
-            self.special_ability_turn = turn
-            print(
-                f"{self.name} is raging! Attack power increased to {self.attack_power}."
-            )
-        else:
-            print("Rage is already active!")
-
-    def defence(self, turn):
-        if self.special_ability_active is None:
-            self.special_ability_active = "Defence"
-            self.special_ability_turn = turn
-            print(f"{self.name} is defending! Immune to attacks.")
-
-    def check_special_ability(self, turn):
-
-        if (
-            self.special_ability_active == "Rage"
-            and turn >= self.special_ability_turn + 2
-        ):
-            self.attack_power -= 20
-            self.special_ability_active = None
-            self.special_ability_end_turn = turn
-            print(
-                f"{self.name}'s rage has ended. Attack power back to {self.attack_power}."
-            )
-        elif (
-            self.special_ability_active == "Defence"
-            and turn >= self.special_ability_turn + 3
-        ):
-            self.special_ability_active = None
-            self.special_ability_end_turn = turn
-            print(f"{self.name}'s defence has ended.")
+from character import Character
+from class_warrior import Warrior
 
 
 # Mage class (inherits from Character)
@@ -139,17 +59,22 @@ def battle(player, wizard):
     while wizard.health > 0 and player.health > 0:
 
         print("\n--- Your Turn ---")
-        print("1. Attack")
-        print("2. Use Special Ability")
+        if player.special_ability_cooldown > 0:
+            print(
+                f"\nCannot use another special ability for {player.special_ability_cooldown} turns."
+            )
+            print(f"Active special ability: {player.special_ability_active}\n")
+        else:
+            print("1. Use Special Ability")
+        print("2. Attack")
         print("3. Heal")
         print("4. View Stats")
-        print(f"Active special ability: {player.special_ability_active}")
 
         choice = input("Choose an action: ")
 
-        if choice == "1":
+        if choice == "2":
             player.attack(wizard)
-        elif choice == "2":
+        elif choice == "1":
             player.special_ability(turn)
         elif choice == "3":
             pass  # Implement heal method
@@ -159,8 +84,6 @@ def battle(player, wizard):
             print("Invalid choice. Try again.")
 
         player.check_special_ability(turn)
-        print(player.special_ability_active)
-        print(player.special_ability_turn)
 
         turn += 1
 
@@ -178,7 +101,7 @@ def battle(player, wizard):
         print(turn)
 
     if wizard.health <= 0:
-        print(f"The wizard {wizard.name} has been defeated by {player.name}!")
+        print(f"{wizard.name} has been defeated by {player.name}!")
 
 
 def main():
