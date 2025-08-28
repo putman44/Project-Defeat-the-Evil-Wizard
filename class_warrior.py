@@ -51,7 +51,6 @@ class Warrior(Character):
         ):
             self.attack_power -= 20
             self.special_ability_active = None
-            self.special_ability_end_turn = turn
 
             print(
                 f"{self.name}'s rage has ended. Attack power back to {self.attack_power}."
@@ -61,5 +60,5 @@ class Warrior(Character):
             and turn >= self.special_ability_turn + 3
         ):
             self.special_ability_active = None
-            self.special_ability_end_turn = turn
+
             print(f"{self.name}'s defence has ended.")
