@@ -20,7 +20,7 @@ class Character:
 
     def heal(self):
         self.health += 15
-        print(f"{self.name} regenerates 5 health! Current health: {self.health}")
+        print(f"{self.name} regenerates 15 health! Current health: {self.health}")
 
     def display_stats(self):
         print(
