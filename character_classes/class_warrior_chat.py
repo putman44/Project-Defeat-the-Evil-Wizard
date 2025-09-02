@@ -32,11 +32,11 @@ class Warrior(Character):
 
     # --- Rage ---
     def _apply_rage(self, wizard):
-        self.attack_power += 20
+        self.attack_power += 45
         print(f"{self.name} is raging! Attack power increased to {self.attack_power}.")
 
     def _remove_rage(self):
-        self.attack_power -= 40
+        self.attack_power -= 45
         print(
             f"{self.name}'s rage has ended! Attack power dropped to {self.attack_power}."
         )

@@ -71,18 +71,24 @@ def battle(player, wizard):
             print("3. Heal")
         print("4. View Stats")
 
-        choice = input("Choose an action: ")
+        valid_choices = ["1", "2", "3", "4"]
+        while True:
+            choice = input("Choose an action: ")
 
-        if choice == "2":
-            player.attack(wizard)
-        elif choice == "1":
-            player.special_ability(turn, wizard)
-        elif choice == "3":
-            player.heal()
-        elif choice == "4":
-            player.display_stats()
-        else:
-            print("Invalid choice. Try again.")
+            if choice not in valid_choices:
+                print("Invalid choice. Try again.")
+                continue
+
+            if choice == "1":
+                player.special_ability(turn, wizard)
+            elif choice == "2":
+                player.attack(wizard)
+            elif choice == "3":
+                player.heal()
+            elif choice == "4":
+                player.display_stats()
+
+            break
 
         player.check_special_ability(turn)
 
