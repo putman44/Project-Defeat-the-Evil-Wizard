@@ -14,6 +14,7 @@ class Warrior(Character):
                 "apply": self._apply_rage,
                 "remove": self._remove_rage,
                 "post_effect": {
+                    "name": "Rage",
                     "duration": 2,  # Penalty duration
                     "apply": self._apply_rage_penalty,
                     "remove": self._remove_rage_penalty,

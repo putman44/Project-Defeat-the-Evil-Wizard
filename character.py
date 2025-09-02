@@ -10,6 +10,7 @@ class Character:
         self.special_ability_cooldown = 0
         self.post_effect_active = None  # reference to post-effect dict
         self.post_effect_turn = None
+        self.post_effect_name = None
 
     def attack(self, opponent):
         opponent.health -= self.attack_power

@@ -15,6 +15,7 @@ class Mage(Character):
                 "apply": self._apply_fireball,
                 "remove": self._remove_fireball,
                 "post_effect": {
+                    "name": "Fireball",
                     "duration": 2,  # Penalty duration
                     "apply": self._apply_fireball_penalty,
                     "remove": self._remove_fireball_penalty,
