@@ -5,6 +5,11 @@ class Character:
         self.health = health
         self.attack_power = attack_power
         self.max_health = health
+        self.special_ability_active = None  # reference to active ability dict
+        self.special_ability_turn = None
+        self.special_ability_cooldown = 0
+        self.post_effect_active = None  # reference to post-effect dict
+        self.post_effect_turn = None
 
     def attack(self, opponent):
         opponent.health -= self.attack_power

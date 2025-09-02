@@ -4,12 +4,6 @@ from character import Character
 class Warrior(Character):
     def __init__(self, name):
         super().__init__(name, health=140, attack_power=30)
-        self.special_ability_active = None  # reference to active ability dict
-        self.special_ability_turn = None
-        self.special_ability_cooldown = 0
-
-        self.post_effect_active = None  # reference to post-effect dict
-        self.post_effect_turn = None
 
         # Ability configuration
         self.abilities = {
