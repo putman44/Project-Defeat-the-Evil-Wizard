@@ -35,11 +35,11 @@ class Bard(Character):
     # --- Confusion ---
     def _apply_confusion(self, wizard):
         print(
-            f"{self.name} has confused the enemy. Enemy attacks will apply to themselves!"
+            f"{self.name} has confused {wizard.name}. Enemy attacks will apply to themselves!"
         )
 
-    def _remove_confusion(self):
-        print("The enemie's confusion has ended")
+    def _remove_confusion(self, wizard):
+        print(f"The {wizard.name} confusion has ended")
 
     # --- Defence ---
     def _apply_defence(self, wizard):

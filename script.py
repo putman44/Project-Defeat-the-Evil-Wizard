@@ -1,13 +1,8 @@
 from character import Character
 from character_classes.class_bard import Bard
+from character_classes.class_cleric import Cleric
 from character_classes.class_mage import Mage
 from character_classes.class_warrior_chat import Warrior
-
-
-# Mage class (inherits from Character)
-class Cleric(Character):
-    def __init__(self, name):
-        super().__init__(name, health=100, attack_power=35)
 
 
 # EvilWizard class (inherits from Character)
@@ -21,6 +16,10 @@ class EvilWizard(Character):
             f"{self.name} attacks themselves for {self.attack_power} in their confusion!"
         )
 
+    def holy_healing(self):
+        self.health -= 10
+        print(f"{self.name} is damaged by holy healing for -10.")
+
     def regenerate(self):
         self.health += 5
         print(f"{self.name} regenerates 5 health! Current health: {self.health}")
@@ -31,7 +30,7 @@ def create_character():
     print("1. Warrior")
     print("2. Mage")
     print("3. Bard")
-    print("4. Paladin")
+    print("4. Cleric")
 
     class_choice = input("Enter the number of your class choice: ")
     name = input("Enter your character's name: ").capitalize()
@@ -66,7 +65,10 @@ def battle(player, wizard):
         else:
             print("1. Use Special Ability")
         print("2. Attack")
-        print("3. Heal")
+        if player.post_effect_name == "Holy Healing":
+            print("Cannot heal until Holy Healing effects have worn off!")
+        else:
+            print("3. Heal")
         print("4. View Stats")
 
         choice = input("Choose an action: ")
@@ -95,6 +97,8 @@ def battle(player, wizard):
                 continue
             elif ability_name == "Confusion":
                 wizard.attack_self()
+            elif ability_name == "Holy Healing":
+                wizard.holy_healing()
             else:
                 wizard.regenerate()
                 wizard.attack(player)
@@ -103,7 +107,7 @@ def battle(player, wizard):
             print(f"{player.name} has been defeated!")
             break
 
-        print(f"Turn {turn}")
+        print(f"\nTurn {turn}")
 
     if wizard.health <= 0:
         print(f"{wizard.name} has been defeated by {player.name}!")

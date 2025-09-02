@@ -40,6 +40,8 @@ class Character:
             self.special_ability_active = ability
             self.special_ability_turn = turn
             self.special_ability_cooldown = ability["cooldown"]
+            if ability["post_effect"] is not None:
+                self.post_effect_name = ability["post_effect"]["name"]
             ability["apply"](wizard)
         else:
             print("Special ability already active or on cooldown!")
@@ -69,3 +71,4 @@ class Character:
                 self.post_effect_active["remove"]()
                 self.post_effect_active = None
                 self.post_effect_turn = None
+                self.post_effect_name = None
