@@ -13,7 +13,7 @@ class Character:
             print(f"{opponent.name} has been defeated!")
 
     def heal(self):
-        self.health += 10
+        self.health += 15
         print(f"{self.name} regenerates 5 health! Current health: {self.health}")
 
     def display_stats(self):
@@ -23,7 +23,7 @@ class Character:
 
     # --- Ability activation ---
 
-    def special_ability(self, turn):
+    def special_ability(self, turn, wizard):
         print("\nWhich special ability would you like to use?")
         for key, ability in self.abilities.items():
             print(f"{key}. {ability['name']}")
@@ -31,16 +31,16 @@ class Character:
         choice = input("Choose special ability: ")
 
         if choice in self.abilities:
-            self._activate_ability(self.abilities[choice], turn)
+            self._activate_ability(self.abilities[choice], turn, wizard)
         else:
             print("Invalid choice")
 
-    def _activate_ability(self, ability, turn):
+    def _activate_ability(self, ability, turn, wizard):
         if self.special_ability_active is None and self.special_ability_cooldown == 0:
             self.special_ability_active = ability
             self.special_ability_turn = turn
             self.special_ability_cooldown = ability["cooldown"]
-            ability["apply"]()
+            ability["apply"](wizard)
         else:
             print("Special ability already active or on cooldown!")
 

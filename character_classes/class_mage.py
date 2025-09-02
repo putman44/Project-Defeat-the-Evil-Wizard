@@ -1,9 +1,10 @@
 from character import Character
 
 
-class Warrior(Character):
+# Mage class (inherits from Character)
+class Mage(Character):
     def __init__(self, name):
-        super().__init__(name, health=140, attack_power=30)
+        super().__init__(name, health=100, attack_power=20)
         self.special_ability_active = None  # reference to active ability dict
         self.special_ability_turn = None
         self.special_ability_cooldown = 0
@@ -14,15 +15,15 @@ class Warrior(Character):
         # Ability configuration
         self.abilities = {
             "1": {
-                "name": "Rage",
-                "cooldown": 8,
-                "duration": 2,  # Active buff duration
-                "apply": self._apply_rage,
-                "remove": self._remove_rage,
+                "name": "Fireball",
+                "cooldown": 5,
+                "duration": 1,  # Active buff duration
+                "apply": self._apply_fireball,
+                "remove": self._remove_fireball,
                 "post_effect": {
                     "duration": 2,  # Penalty duration
-                    "apply": self._apply_rage_penalty,
-                    "remove": self._remove_rage_penalty,
+                    "apply": self._apply_fireball_penalty,
+                    "remove": self._remove_fireball_penalty,
                 },
             },
             "2": {
@@ -36,24 +37,23 @@ class Warrior(Character):
         }
 
     # --- Rage ---
-    def _apply_rage(self):
-        self.attack_power += 20
-        print(f"{self.name} is raging! Attack power increased to {self.attack_power}.")
+    def _apply_fireball(self, wizard):
+        self.attack_power += 80
+        print(f"{self.name} has cast fireball!")
+        self.attack(wizard)
+        self.attack_power -= 80
 
-    def _remove_rage(self):
-        self.attack_power -= 40
+    def _remove_fireball(self):
+        pass
+
+    def _apply_fireball_penalty(self):
+        self.health -= 10
         print(
-            f"{self.name}'s rage has ended! Attack power dropped to {self.attack_power}."
+            f"{self.name} burned from the fireball, health decreased to {self.health}"
         )
 
-    def _apply_rage_penalty(self):
-        print(f"{self.name} is weakened after rage...")
-
-    def _remove_rage_penalty(self):
-        self.attack_power += 20
-        print(
-            f"{self.name} has recovered from rage penalty. Attack power back to {self.attack_power}."
-        )
+    def _remove_fireball_penalty(self):
+        print(f"{self.name}'s burning has ceased.")
 
     # --- Defence ---
     def _apply_defence(self, wizard):

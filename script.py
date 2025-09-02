@@ -1,11 +1,6 @@
 from character import Character
+from character_classes.class_mage import Mage
 from character_classes.class_warrior_chat import Warrior
-
-
-# Mage class (inherits from Character)
-class Mage(Character):
-    def __init__(self, name):
-        super().__init__(name, health=100, attack_power=35)
 
 
 # Mage class (inherits from Character)
@@ -38,7 +33,7 @@ def create_character():
     print("4. Paladin")
 
     class_choice = input("Enter the number of your class choice: ")
-    name = input("Enter your character's name: ")
+    name = input("Enter your character's name: ").capitalize()
 
     if class_choice == "1":
         return Warrior(name)
@@ -78,7 +73,7 @@ def battle(player, wizard):
         if choice == "2":
             player.attack(wizard)
         elif choice == "1":
-            player.special_ability(turn)
+            player.special_ability(turn, wizard)
         elif choice == "3":
             player.heal()
         elif choice == "4":
@@ -101,7 +96,7 @@ def battle(player, wizard):
             print(f"{player.name} has been defeated!")
             break
 
-        print(turn)
+        print(f"Turn {turn}")
 
     if wizard.health <= 0:
         print(f"{wizard.name} has been defeated by {player.name}!")
