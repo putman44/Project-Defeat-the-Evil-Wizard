@@ -36,7 +36,7 @@ class Warrior(Character):
         }
 
     # --- Rage ---
-    def _apply_rage(self):
+    def _apply_rage(self, wizard):
         self.attack_power += 20
         print(f"{self.name} is raging! Attack power increased to {self.attack_power}.")
 

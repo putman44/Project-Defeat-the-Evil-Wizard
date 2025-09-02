@@ -1,12 +1,7 @@
 from character import Character
+from character_classes.class_bard import Bard
 from character_classes.class_mage import Mage
 from character_classes.class_warrior_chat import Warrior
-
-
-# Mage class (inherits from Character)
-class Bard(Character):
-    def __init__(self, name):
-        super().__init__(name, health=100, attack_power=15)
 
 
 # Mage class (inherits from Character)
@@ -20,6 +15,12 @@ class EvilWizard(Character):
     def __init__(self, name):
         super().__init__(name, health=150, attack_power=15)
 
+    def attack_self(self):
+        self.health -= self.attack_power
+        print(
+            f"{self.name} attacks themselves for {self.attack_power} in their confusion!"
+        )
+
     def regenerate(self):
         self.health += 5
         print(f"{self.name} regenerates 5 health! Current health: {self.health}")
@@ -29,7 +30,7 @@ def create_character():
     print("Choose your character class:")
     print("1. Warrior")
     print("2. Mage")
-    print("3. Archer")
+    print("3. Bard")
     print("4. Paladin")
 
     class_choice = input("Enter the number of your class choice: ")
@@ -86,10 +87,16 @@ def battle(player, wizard):
         turn += 1
 
         if wizard.health > 0:
-            wizard.regenerate()
-            if player.special_ability_active == "Defence":
+
+            active_ability = player.special_ability_active
+            ability_name = active_ability["name"] if active_ability else None
+
+            if ability_name == "Defence":
                 continue
+            elif ability_name == "Confusion":
+                wizard.attack_self()
             else:
+                wizard.regenerate()
                 wizard.attack(player)
 
         if player.health <= 0:
