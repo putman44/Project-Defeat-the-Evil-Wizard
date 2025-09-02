@@ -12,6 +12,10 @@ class Character:
         if opponent.health <= 0:
             print(f"{opponent.name} has been defeated!")
 
+    def heal(self):
+        self.health += 10
+        print(f"{self.name} regenerates 5 health! Current health: {self.health}")
+
     def display_stats(self):
         print(
             f"{self.name}'s Stats - Health: {self.health}/{self.max_health}, Attack Power: {self.attack_power}"

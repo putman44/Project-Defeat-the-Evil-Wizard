@@ -1,5 +1,5 @@
 from character import Character
-from class_warrior import Warrior
+from character_classes.class_warrior_chat import Warrior
 
 
 # Mage class (inherits from Character)
@@ -63,7 +63,10 @@ def battle(player, wizard):
             print(
                 f"\nCannot use another special ability for {player.special_ability_cooldown} turns."
             )
-            print(f"Active special ability: {player.special_ability_active}\n")
+
+            print(
+                f"Active special ability: {player.special_ability_active['name'] if player.special_ability_active else None}\n"
+            )
         else:
             print("1. Use Special Ability")
         print("2. Attack")
@@ -77,7 +80,7 @@ def battle(player, wizard):
         elif choice == "1":
             player.special_ability(turn)
         elif choice == "3":
-            pass  # Implement heal method
+            player.heal()
         elif choice == "4":
             player.display_stats()
         else:
