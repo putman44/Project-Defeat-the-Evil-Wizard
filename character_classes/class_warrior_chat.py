@@ -35,17 +35,17 @@ class Warrior(Character):
         self.attack_power += 45
         print(f"{self.name} is raging! Attack power increased to {self.attack_power}.")
 
-    def _remove_rage(self):
+    def _remove_rage(self, wizard):
         self.attack_power -= 45
+
+    def _apply_rage_penalty(self, wizard):
+        self.attack_power -= 10
         print(
-            f"{self.name}'s rage has ended! Attack power dropped to {self.attack_power}."
+            f"{self.name} is weakened after rage, attack power decreased to {self.attack_power}"
         )
 
-    def _apply_rage_penalty(self):
-        print(f"{self.name} is weakened after rage...")
-
-    def _remove_rage_penalty(self):
-        self.attack_power += 20
+    def _remove_rage_penalty(self, wizard):
+        self.attack_power += 10
         print(
             f"{self.name} has recovered from rage penalty. Attack power back to {self.attack_power}."
         )
@@ -54,5 +54,5 @@ class Warrior(Character):
     def _apply_defence(self, wizard):
         print(f"{self.name} is defending! Immune to attacks.")
 
-    def _remove_defence(self):
+    def _remove_defence(self, wizard):
         print(f"{self.name}'s defence has ended.")

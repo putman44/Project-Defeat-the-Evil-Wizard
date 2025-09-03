@@ -39,5 +39,5 @@ class Bard(Character):
     def _apply_defence(self, wizard):
         print(f"{self.name} is defending! Immune to attacks.")
 
-    def _remove_defence(self):
+    def _remove_defence(self, wizard):
         print(f"{self.name}'s defence has ended.")

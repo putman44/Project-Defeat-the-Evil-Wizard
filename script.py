@@ -13,7 +13,7 @@ class EvilWizard(Character):
     def attack_self(self):
         self.health -= self.attack_power
         print(
-            f"{self.name} attacks themselves for {self.attack_power} in their confusion!"
+            f"{self.name} attacks themselves for {self.attack_power} damage in their confusion!"
         )
 
     def holy_healing(self):
@@ -21,8 +21,8 @@ class EvilWizard(Character):
         print(f"{self.name} is damaged by holy healing for -10.")
 
     def regenerate(self):
-        self.health += 5
-        print(f"{self.name} regenerates 5 health! Current health: {self.health}")
+        self.health += 15
+        print(f"{self.name} regenerates 15 health! Current health: {self.health}")
 
 
 def create_character():
@@ -90,7 +90,7 @@ def battle(player, wizard):
 
             break
 
-        player.check_special_ability(turn)
+        player.check_special_ability(turn, wizard)
 
         turn += 1
 

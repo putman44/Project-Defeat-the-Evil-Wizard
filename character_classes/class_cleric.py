@@ -4,7 +4,7 @@ from character import Character
 # Mage class (inherits from Character)
 class Cleric(Character):
     def __init__(self, name):
-        super().__init__(name, health=100, attack_power=10)
+        super().__init__(name, health=100, attack_power=15)
 
         # Ability configuration
         self.abilities = {
@@ -42,15 +42,15 @@ class Cleric(Character):
             f"{self.name} has applied Holy Healing. 10+ health per turn and -10 health per turn for {wizard.name}."
         )
 
-    def _remove_holy_healing(self):
+    def _remove_holy_healing(self, wizard):
         print(f"{self.name}'s Holy Healing has ended.")
 
-    def _apply_holy_healing_penalty(self):
+    def _apply_holy_healing_penalty(self, wizard):
         print(
             f"{self.name}'s Holy healing prevents healing for {self.special_ability_cooldown} turns"
         )
 
-    def _remove_holy_healing_penalty(self):
+    def _remove_holy_healing_penalty(self, wizard):
         print(
             f"{self.name} has recovered from Holy Healing effects. Able to heal again."
         )
@@ -59,5 +59,5 @@ class Cleric(Character):
     def _apply_defence(self, wizard):
         print(f"{self.name} is defending! Immune to attacks.")
 
-    def _remove_defence(self):
+    def _remove_defence(self, wizard):
         print(f"{self.name}'s defence has ended.")

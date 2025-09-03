@@ -31,28 +31,28 @@ class Mage(Character):
             },
         }
 
-    # --- Rage ---
+    # --- Fireball ---
     def _apply_fireball(self, wizard):
         self.attack_power += 80
         print(f"{self.name} has cast fireball!")
         self.attack(wizard)
         self.attack_power -= 80
 
-    def _remove_fireball(self):
+    def _remove_fireball(self, wizard):
         pass
 
-    def _apply_fireball_penalty(self):
+    def _apply_fireball_penalty(self, wizard):
         self.health -= 10
         print(
-            f"{self.name} burned from the fireball, health decreased to {self.health}"
+            f"{self.name} burned from the fireball and takes 10 damage, health decreased to {self.health}"
         )
 
-    def _remove_fireball_penalty(self):
+    def _remove_fireball_penalty(self, wizard):
         print(f"{self.name}'s burning has ceased.")
 
     # --- Defence ---
     def _apply_defence(self, wizard):
         print(f"{self.name} is defending! Immune to attacks.")
 
-    def _remove_defence(self):
+    def _remove_defence(self, wizard):
         print(f"{self.name}'s defence has ended.")
