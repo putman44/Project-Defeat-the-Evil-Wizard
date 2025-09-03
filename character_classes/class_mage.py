@@ -22,11 +22,11 @@ class Mage(Character):
                 },
             },
             "2": {
-                "name": "Defence",
+                "name": "Protection",
                 "cooldown": 6,
                 "duration": 3,
-                "apply": self._apply_defence,
-                "remove": self._remove_defence,
+                "apply": self._apply_protection,
+                "remove": self._remove_protection,
                 "post_effect": None,  # No penalty/recovery
             },
         }
@@ -50,9 +50,9 @@ class Mage(Character):
     def _remove_fireball_penalty(self, wizard):
         print(f"{self.name}'s burning has ceased.")
 
-    # --- Defence ---
-    def _apply_defence(self, wizard):
-        print(f"{self.name} is defending! Immune to attacks.")
+    # --- Protection ---
+    def _apply_protection(self, wizard):
+        print(f"{self.name} has cast protection! {wizard.name} has no power here!")
 
-    def _remove_defence(self, wizard):
-        print(f"{self.name}'s defence has ended.")
+    def _remove_protection(self, wizard):
+        print(f"{self.name}'s protection has ended.")

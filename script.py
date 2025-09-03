@@ -99,7 +99,12 @@ def battle(player, wizard):
             active_ability = player.special_ability_active
             ability_name = active_ability["name"] if active_ability else None
 
-            if ability_name == "Defence":
+            if ability_name in [
+                "Defence",
+                "Holy Shield",
+                "Protection",
+                "Melodic Distraction",
+            ]:
                 continue
             elif ability_name == "Confusion":
                 wizard.attack_self()

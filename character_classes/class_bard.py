@@ -17,11 +17,11 @@ class Bard(Character):
                 "post_effect": None,
             },
             "2": {
-                "name": "Defence",
+                "name": "Melodic Distraction",
                 "cooldown": 6,
                 "duration": 3,
-                "apply": self._apply_defence,
-                "remove": self._remove_defence,
+                "apply": self._apply_melodic_distraction,
+                "remove": self._remove_melodic_distraction,
                 "post_effect": None,  # No penalty/recovery
             },
         }
@@ -35,9 +35,11 @@ class Bard(Character):
     def _remove_confusion(self, wizard):
         print(f"The {wizard.name} confusion has ended")
 
-    # --- Defence ---
-    def _apply_defence(self, wizard):
-        print(f"{self.name} is defending! Immune to attacks.")
+    # --- Melodic Distraction ---
+    def _apply_melodic_distraction(self, wizard):
+        print(
+            f"{self.name} is playing melodic distraction. {wizard.name} is mezmerized and cannot attack!"
+        )
 
-    def _remove_defence(self, wizard):
+    def _remove_melodic_distraction(self, wizard):
         print(f"{self.name}'s defence has ended.")

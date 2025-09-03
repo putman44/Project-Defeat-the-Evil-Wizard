@@ -52,7 +52,9 @@ class Warrior(Character):
 
     # --- Defence ---
     def _apply_defence(self, wizard):
-        print(f"{self.name} is defending! Immune to attacks.")
+        print(
+            f"{self.name} is defending! {wizard.name}'s attacks cannot break through!"
+        )
 
     def _remove_defence(self, wizard):
         print(f"{self.name}'s defence has ended.")

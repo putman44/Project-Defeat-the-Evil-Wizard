@@ -1,3 +1,7 @@
+import math
+import random
+
+
 # Base Character class
 class Character:
     def __init__(self, name, health, attack_power):
@@ -13,14 +17,20 @@ class Character:
         self.post_effect_name = None
 
     def attack(self, opponent):
-        opponent.health -= self.attack_power
-        print(f"{self.name} attacks {opponent.name} for {self.attack_power} damage!")
+        rand_num = random.uniform(1, 2)
+        opponent.health -= math.ceil(self.attack_power * rand_num)
+        print(
+            f"{self.name} attacks {opponent.name} for {math.ceil(self.attack_power * rand_num)} damage!"
+        )
         if opponent.health <= 0:
             print(f"{opponent.name} has been defeated!")
 
     def heal(self):
-        self.health += 10
-        print(f"{self.name} regenerates 10 health! Current health: {self.health}")
+        if self.health < self.max_health:
+            self.health += 10
+            print(f"{self.name} regenerates 10 health! Current health: {self.health}")
+        else:
+            print("Already at max health!")
 
     def display_stats(self):
         print(

@@ -22,18 +22,19 @@ class Cleric(Character):
                 },
             },
             "2": {
-                "name": "Defence",
+                "name": "Holy Shield",
                 "cooldown": 6,
                 "duration": 3,
-                "apply": self._apply_defence,
-                "remove": self._remove_defence,
+                "apply": self._apply_holy_shield,
+                "remove": self._remove_holy_shield,
                 "post_effect": None,  # No penalty/recovery
             },
         }
 
     def heal(self):
-        self.health += 30
-        print(f"{self.name} regenerates 30 health! Current health: {self.health}")
+        if self.health < self.max_health:
+            self.health += 30
+            print(f"{self.name} regenerates 30 health! Current health: {self.health}")
 
     # --- Holy Healing ---
     def _apply_holy_healing(self, wizard):
@@ -55,9 +56,11 @@ class Cleric(Character):
             f"{self.name} has recovered from Holy Healing effects. Able to heal again."
         )
 
-    # --- Defence ---
-    def _apply_defence(self, wizard):
-        print(f"{self.name} is defending! Immune to attacks.")
+    # --- Holy Shield ---
+    def _apply_holy_shield(self, wizard):
+        print(
+            f"{self.name} has cast Holy Shield! {wizard.name}'s attack have no effect!"
+        )
 
-    def _remove_defence(self, wizard):
-        print(f"{self.name}'s defence has ended.")
+    def _remove_holy_shield(self, wizard):
+        print(f"{self.name}'s Holy Shield has ended.")
